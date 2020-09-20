@@ -18,6 +18,7 @@
   <?php echo returnPageContents('navbar/content');?>
   <!-- content area start -->
   <div class="container-fluid main-content">
+
     <div class="row" id='content'>
       <?php echo $so['content']; ?>
 
@@ -32,7 +33,7 @@
   <script src="<?php echo $so['theme_url']; ?>/assets/js/popper.js"></script>
   <script src='<?php echo $so['theme_url']; ?>/assets/js/bootstrap.min.js'></script>
   <script src="<?php echo $so['theme_url']; ?>/assets/js/fontawesome.js"></script>
-  <script src="<?php echo $so['theme_url']; ?>/assets/js/script.js"></script>
+  <script src="<?php echo $so['theme_url']; ?>/assets/js/script.js?v=<?php echo filemtime("theme/assets/js/script.js") ?>"></script>
   <script>
     function ajaxRequestFile() {
       return '<?php echo $so['site_url'];?>/requests.php';

@@ -2,11 +2,22 @@
   <script>
   <?php if(reminderInterval($so['user']['timer']) !=false){ ?>
     // checkReminder
-   var reminderInterval= setInterval(reminderInterval, 1000);
+   var reminderInterval= setInterval(reminderCheckInterval, 1000);
 
-   function reminderInterval(){
-    $.post(ajaxRequestFile() + '?f=user&s=check_reminder', {}, function (data) {
-      var data = JSON.parse(data);
+  //  reminder with only js no server required
+  function reminderExceeded(reminderAt){
+    if (Math.floor(Date.now()/1000)>reminderAt)
+      return true;
+    else
+      return false;
+   }
+   function reminderCheckInterval(){
+
+      var data = {};
+      reminderAt = getCookie('reminderAt')
+      data.success = reminderExceeded(reminderAt)
+
+
       if (data.success == true) {
         // show health reminder
         $('#Modal').modal('toggle')
@@ -14,12 +25,11 @@
 
 
       } else if (data.success == false) {
-        // console.log(data.remaining);
-        if(data.message=='remainderDisabled'){
+        console.log(reminderAt-Math.floor(Date.now()/1000));
+        if (getCookie('reminderInterval')=='false'){
           clearInterval(reminderInterval);
         }
       }
-    })
    }
 <?php }?>
 

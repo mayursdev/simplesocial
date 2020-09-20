@@ -22,8 +22,8 @@
           </div>
           <div class="type_msg">
             <div class="input_msg_write">
-              <input type="text" class="write_msg" onkeyup="sendMessage(this,<?php echo $so['user_to_message']['user_id']; ?>,event )" placeholder="Type a message">
-              <button class="msg_send_btn" type="button">Send</button>
+            <input type="text" class="write_msg" onkeyup="sendMessage(<?php echo $so['user_to_message']['user_id']; ?>,event )" placeholder="Type a message">
+              <button class="msg_send_btn" onclick="sendMessage(<?php echo $so['user_to_message']['user_id']; ?>,event,method='btn')" type="button">Send</button>
             </div>
           </div>
         </div>

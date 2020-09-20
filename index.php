@@ -4,6 +4,10 @@ require_once('includes/init.php');
 if($so['logged_in']){
   updateLastseen($so['user']['user_id']);
   $reminderInterval = reminderInterval($so['user']['timer']);
+  if(!$reminderInterval){
+    $reminderInterval = 'false';
+  }
+  setcookie('reminderInterval', $reminderInterval,0);
   $reminderAt = strtotime($reminderInterval);
 
   if(!isset($_COOKIE['reminderAt'])){

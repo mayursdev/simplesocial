@@ -80,6 +80,20 @@ if($f == 'user'){
     if(isset($fullName)&& !empty($fullName)){
       if(strlen($fullName)>=3){
         $res = dbQuery('update users set screenName = :fullName, about = :about, birthday = :birthday, timer = :timer where user_id = :id',[':fullName'=>sanitized($fullName),':about'=>sanitized($about),':birthday'=>sanitized($birthday),':id'=>$so['user']['user_id'],':timer'=>$timer]);
+        // check if user updated reminder interval
+        $reminderInterval = reminderInterval($timer);
+        if($_COOKIE['reminderInterval']!=$reminderInterval){
+          if($reminderInterval!=false){
+            $reminderAt = strtotime($reminderInterval);
+            setcookie('reminderAt', $reminderAt, 0);
+            setcookie('reminderInterval', $reminderInterval,0);
+
+          }else{
+            setcookie('reminderInterval', 'false',0);
+
+          }
+        }
+
         if($res){
           $data['success']=true;
           $data['message']=$success_icon.' Settings Update Succesful!';
