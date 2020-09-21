@@ -1,5 +1,5 @@
       <!-- left sidebar -->
-      <div class="col-sm-2 left-fixed">
+      <div class="col-sm-2 left-fixed d-none d-md-block">
         <ul class="list-wrapper">
           <li class="list-item">
             <a href="<?php echo $so['site_url']; ?>">
