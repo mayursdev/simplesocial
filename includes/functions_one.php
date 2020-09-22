@@ -163,7 +163,7 @@ function insertPost($postData){
   $postText = $postData['postText'];
   $postImage = $postData['postImage'];
   $postBy = $so['user']['user_id'];
-  $res = dbQuery('insert into posts (post_text,post_by,likes,post_image) values(:post_text,:post_by,:likes,:post_image)',[':post_text'=>$postText,':post_by'=>$postBy,':likes'=>0,':post_image'=>$postImage]);
+  $res = dbQuery('insert into posts (post_text,post_by,likes,post_image,posted_on) values(:post_text,:post_by,:likes,:post_image,:posted_on)',[':post_text'=>$postText,':post_by'=>$postBy,':likes'=>0,':post_image'=>$postImage,':posted_on'=>returnNow()]);
   if($res['success']){
     return $res['lastInsertId'];
   }
@@ -349,7 +349,7 @@ function sendNotification($type,$target,$noti_from,$noti_for){
 
 
 function updateLastseen($user_id){
-  $res = dbQuery('update users set lastseen = null where user_id = :self',[':self'=>$user_id]);
+  $res = dbQuery('update users set lastseen = :lastseen where user_id = :self',[':self'=>$user_id,':lastseen'=>returnNow()]);
   return $res;
 }
 

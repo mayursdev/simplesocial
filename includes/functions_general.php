@@ -8,6 +8,10 @@ function returnPageContents($file_name){
   $contents = ob_get_clean();
   return $contents;
 }
+
+function returnNow(){
+  return date("Y-m-d H:i:s",time());
+}
 function sanitized($string){
   $string = trim($string);
   $string = htmlspecialchars($string, ENT_QUOTES);

@@ -26,7 +26,7 @@
       $data =[];
       extract($_POST);
       if(isset($friend_id)){
-        $res = dbQuery('insert into messages (message_to,message_from,message) values(:friend_id,:self,:message)',[':friend_id'=>sanitized($friend_id),':self'=>$so['user']['user_id'],':message'=>sanitized($message)]);
+        $res = dbQuery('insert into messages (message_to,message_from,message,message_at) values(:friend_id,:self,:message,:message_at)',[':friend_id'=>sanitized($friend_id),':self'=>$so['user']['user_id'],':message'=>sanitized($message),':message_at'=>returnNow()]);
         if($res['success']){
           $data['success'] = true;
           $so['user_message']['message'] = $message;
