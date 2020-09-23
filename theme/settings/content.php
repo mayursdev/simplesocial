@@ -72,15 +72,15 @@
             <div class="row">
               <div class="form-group col-lg-12 mb-5">
                 <label for="currentPass" class='h4'>Current Password</label>
-                <input type="text" name="currentPass" class='form-control p-4' id="currentPass" required>
+                <input type="password" name="currentPass" class='form-control p-4' id="currentPass" required>
               </div>
               <div class="form-group col-lg-6 mb-5">
                 <label for="newPass" class='h4'>New Password</label>
-                <input type="text" name="newPass" class='form-control p-4' id="newPass" required>
+                <input type="password" name="newPass" class='form-control p-4' id="newPass" required>
               </div>
               <div class="form-group col-lg-6 mb-5">
                 <label for="confirmPass" class='h4'>Repeat Password</label>
-                <input type="text" name="confirmPass" class='form-control p-4' id="confirmPass" required>
+                <input type="password" name="confirmPass" class='form-control p-4' id="confirmPass" required>
               </div>
               <div class="col-lg-12">
                 <button class="btn px-5 ml-auto py-2 button-primary d-flex justify-content-center">

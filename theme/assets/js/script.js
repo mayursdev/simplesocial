@@ -159,7 +159,7 @@ function followUser(userId) {
 }
 
 function censorWord(sentence) {
-  var toCensor = ["stupid", "idiot", "kamina"];
+  var toCensor = ["shit", "idiot", "stupid", "kamina", "fuck"];
   var sentence = sentence.toLowerCase();
 
   return sentence
