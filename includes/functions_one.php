@@ -191,7 +191,7 @@ function postIsLiked($postId){
 function insertComment($data){
   global $so,$db;
   extract($data);
-  $res = dbQuery('insert into comments (comment_by,comment_on,comment_text) values(:comment_by,:comment_on,:comment_text)',['comment_by'=>sanitized($so['user']['user_id']),':comment_on'=>sanitized($commentOn),':comment_text'=>sanitized($commentText)]);
+  $res = dbQuery('insert into comments (comment_by,comment_on,comment_text,comment_at) values(:comment_by,:comment_on,:comment_text,:comment_at)',['comment_by'=>sanitized($so['user']['user_id']),':comment_on'=>sanitized($commentOn),':comment_text'=>sanitized($commentText),':comment_at'=>returnNow()]);
   if($res['success']==true){
     return true;
   }else{

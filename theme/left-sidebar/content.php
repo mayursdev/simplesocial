@@ -40,7 +40,7 @@
               Logout
             </a>
           </li>
-          <span></span>
+          <span style="font-size: 1.2rem;"></span>
         </ul>
       </div>
       <!-- left sidebar end -->
