@@ -1,35 +1,41 @@
  <?php if($so['logged_in']){ ?>
   <script>
+    //  reminder with only js no server required
+    function reminderExceeded(reminderAt){
+    if(reminderAt > 0)
+      return false;
+    else
+      return true;
+   }
   <?php if(reminderInterval($so['user']['timer']) !=false){ ?>
     // checkReminder
+
    var reminderInterval= setInterval(reminderCheckInterval, 1000);
 
-  //  reminder with only js no server required
-  function reminderExceeded(reminderAt){
-    if (Math.floor(Date.now()/1000)>reminderAt)
-      return true;
-    else
-      return false;
-   }
    function reminderCheckInterval(){
 
       var data = {};
-      reminderAt = getCookie('reminderAt')
+
+      let reminderAt = getCookie('reminderAt')
+
       data.success = reminderExceeded(reminderAt)
 
-
-      if (data.success == true) {
+      if (data.success == true && reminderAt!='false') {
         // show health reminder
         $('#Modal').modal('toggle')
         clearInterval(reminderInterval);
 
-
       } else if (data.success == false) {
-        console.log(reminderAt-Math.floor(Date.now()/1000));
+        // console.log(reminderAt);
+        let newReminderAt = parseInt(getCookie('reminderAt')) - 1
+        // setCookie('reminderAt',newReminderAt,1)
+        document.cookie = "reminderAt="+newReminderAt;
+
         if (getCookie('reminderInterval')=='false'){
           clearInterval(reminderInterval);
         }
       }
+
    }
 <?php }?>
 

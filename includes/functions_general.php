@@ -8,6 +8,26 @@ function returnPageContents($file_name){
   $contents = ob_get_clean();
   return $contents;
 }
+function settingReminderCookies($reminderInterval){
+  if(!$reminderInterval){
+    $reminderInterval = 'false';
+    $reminderAt = 'false';
+  }else {
+    $reminderAt = strtotime($reminderInterval) - strtotime(returnNow());
+
+  }
+  // setcookie('reminderInterval', $reminderInterval,0);
+
+  if(!isset($_COOKIE['reminderAt'])){
+        setcookie('reminderAt', $reminderAt, 0);
+        setcookie('reminderInterval', $reminderInterval,0);
+
+  }elseif(reminderExceeded($_COOKIE['reminderAt']) || ($reminderInterval != $_COOKIE['reminderInterval'])){
+      setcookie('reminderAt', $reminderAt, 0);
+      setcookie('reminderInterval', $reminderInterval, 0);
+
+    }
+}
 
 function returnNow(){
   return date("Y-m-d H:i:s",time());
@@ -85,7 +105,7 @@ function reminderInterval($timer){//timer = $so['user']['timer'];
 }
 
 function reminderExceeded($reminderAt){
-  if(time()<=$reminderAt){
+  if($reminderAt>0){
     return false;
   }else{
     return true;

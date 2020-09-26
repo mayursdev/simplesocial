@@ -4,29 +4,8 @@ require_once('includes/init.php');
 if($so['logged_in']){
   updateLastseen($so['user']['user_id']);
   $reminderInterval = reminderInterval($so['user']['timer']);
-  if(!$reminderInterval){
-    $reminderInterval = 'false';
-  }
-  setcookie('reminderInterval', $reminderInterval,0);
-  $reminderAt = strtotime($reminderInterval);
+  settingReminderCookies($reminderInterval);
 
-  if(!isset($_COOKIE['reminderAt'])){
-
-      if($reminderInterval!=false){
-        setcookie('reminderAt', $reminderAt, 0);
-        // setcookie('reminderSetAt', date('d m Y h:i:s'), time() + (86400 * 30));
-        setcookie('reminderInterval', $reminderInterval,0);
-      }
-
-  }else{
-
-  if(reminderExceeded($_COOKIE['reminderAt']) || ($reminderInterval != $_COOKIE['reminderInterval'])){
-      setcookie('reminderAt', $reminderAt, 0);
-      setcookie('reminderInterval', $reminderInterval, 0);
-
-
-    }
-  }
 }
 
 $page ='';

@@ -82,17 +82,7 @@ if($f == 'user'){
         $res = dbQuery('update users set screenName = :fullName, about = :about, birthday = :birthday, timer = :timer where user_id = :id',[':fullName'=>sanitized($fullName),':about'=>sanitized($about),':birthday'=>sanitized($birthday),':id'=>$so['user']['user_id'],':timer'=>$timer]);
         // check if user updated reminder interval
         $reminderInterval = reminderInterval($timer);
-        if($_COOKIE['reminderInterval']!=$reminderInterval){
-          if($reminderInterval!=false){
-            $reminderAt = strtotime($reminderInterval);
-            setcookie('reminderAt', $reminderAt, 0);
-            setcookie('reminderInterval', $reminderInterval,0);
-
-          }else{
-            setcookie('reminderInterval', 'false',0);
-
-          }
-        }
+        settingReminderCookies($reminderInterval);
 
         if($res){
           $data['success']=true;
@@ -263,35 +253,6 @@ if($f == 'user'){
       $data['success']=false;
 
     }
-  }
-  if($s=='check_reminder'){
-    $data = [];
-    if(isset($_COOKIE['reminderAt'])){
-    $reminderAt = $_COOKIE['reminderAt'];
-    $reminderExceeded = reminderExceeded($reminderAt);
-    if($reminderExceeded){
-      $data['success']=true;
-
-    }else{
-      $data['success']=false;
-      $reminderInterval = reminderInterval($so['user']['timer']);
-
-      if($_COOKIE['reminderInterval']!=$reminderInterval){
-        if($reminderInterval!=false){
-          $reminderAt = strtotime($reminderInterval);
-          setcookie('reminderAt', $reminderAt, 0);
-          setcookie('reminderInterval', $reminderInterval,0);
-
-        }else{
-          $data['message']='remainderDisabled';
-
-        }
-
-      }
-    }
-  }
-    $data['remaining'] = $_COOKIE['reminderAt'] - time();
-    echo json_encode($data);
   }
 
   if($s=='search_users'){
